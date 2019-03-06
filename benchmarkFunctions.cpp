@@ -2,7 +2,7 @@
 #include <iostream>
 
 /* QUICKSORT AND HELPER FUNCTIONS
- * Uses vector
+ * Uses vector and function based on Hoare partition scheme
  */
 
 int partition(std::vector<int> &array, int lo, int hi)
@@ -52,8 +52,26 @@ void INTEGERQuickSort(std::vector<int> &array)
 }
 
 /* MATRIX INVERSION AND HELPER FUNCTIONS
- * 
+ * Uses vector and based on LU decomposition
+ * I.e some matrix A is split into two matrix L and U where they are the upper and lower triangle of the square matrix.
+ * This makes solving for the inverse easier.
  */
+
+void LUDecompose(std::vector<std::vector<double>> &matrix, int dimesion, std::vector<int> piv)
+{
+
+}
+
+void LUMatrixInvert(std::vector<std::vector<double>> &matrix, std::vector<std::vector<double>> &inverse, int dimesion, std::vector<int> piv)
+{
+
+}
+
+void DOUBLEmatrixInv(std::vector<std::vector<double>> &matrix)
+{
+    
+}
+
 
 /*
  * 
