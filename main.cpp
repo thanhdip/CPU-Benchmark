@@ -98,7 +98,7 @@ int main()
     std::cout << "vfloat = " << vfloat << " minv/min " << "|_| vint = " << vint << " sort/min" << std::endl;
 
     std::cout << "\nEND BENCHMARK" << std::endl;
-    std::cout << "Press any key to exit..." << std::endl;
+    std::cout << "Press ENTER to exit..." << std::endl;
     std::cin.get();
     return 0;
 }
