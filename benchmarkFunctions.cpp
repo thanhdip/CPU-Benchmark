@@ -1,5 +1,6 @@
 #include "benchmarkFunctions.h"
 #include <iostream>
+#include <math.h> 
 
 /* QUICKSORT AND HELPER FUNCTIONS
  * Uses vector and function based on Hoare partition scheme
@@ -7,7 +8,7 @@
 
 int partition(std::vector<int> &array, int lo, int hi)
 {
-    int pivot = array.at((lo+hi)/2);
+    int pivot = array[(lo+hi)/2];
     int i = lo - 1;
     int j = hi + 1;
 
@@ -16,21 +17,21 @@ int partition(std::vector<int> &array, int lo, int hi)
         do
         {
             i = i + 1;
-        } while (array.at(i) < pivot);
+        } while (array[i] < pivot);
 
         do
         {
             j = j - 1;
-        } while (array.at(j) > pivot);
+        } while (array[j] > pivot);
         
         if(i >= j)
         {
             return j;
         }
         //Swap
-        int temp = array.at(i);
-        array.at(i) = array.at(j);
-        array.at(j) = temp;
+        int temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
     }
 
 }
@@ -57,27 +58,66 @@ void INTEGERQuickSort(std::vector<int> &array)
  * This makes solving for the inverse easier.
  */
 
-void LUDecompose(std::vector<std::vector<double>> &matrix, int dimesion, std::vector<int> piv)
+void LUDecompose(std::vector<std::vector<double>> &matrix, int dimension)
 {
-
+    double tem;
+    for(int k = 0; k <= dimension - 1; k++)
+    {
+        for(int j = k + 1; j <= dimension; j++)
+        {
+            tem = matrix[j][k] / matrix[k][k];
+            for(int i = k; i <= dimension; i++)
+            {
+                matrix[j][i] = matrix[j][i] - tem * matrix[k][i];
+            }
+            matrix[j][k] = tem;
+        }
+    }
 }
 
-void LUMatrixInvert(std::vector<std::vector<double>> &matrix, std::vector<std::vector<double>> &inverse, int dimesion, std::vector<int> piv)
+std::vector<std::vector<double>> LUMatrixInvert(std::vector<std::vector<double>> &matrix, int dimension)
 {
+    std::vector<double> identityVec(dimension + 1, 0.0);
+    std::vector<double> y(dimension + 1, 0.0);
+    std::vector<std::vector<double>> s(dimension + 1, std::vector<double>(dimension + 1, 0.0));
+    double tem;
 
+    for(int m = 0; m <= dimension; m++)
+    {
+        for(int x = 0; x < dimension; x++)
+        {
+            identityVec[x] = 0.0;
+        }
+        identityVec[m] = 1.0;
+
+        for(int i = 0; i <= dimension; i++)
+        {
+            tem = 0.0;
+            for(int j = 0; j <= i - 1; j++)
+            {
+                tem = tem + (matrix[i][j] * y[j]);
+            }
+            y[i] = identityVec[i] - tem;
+        }
+
+        for(int i = dimension; i >= 0; i--)
+        {
+            tem = 0.0;
+            for(int j = i + 1; j <= dimension; j++)
+            {
+                tem = tem + (matrix[i][j] * s[j][m]);
+            }
+            s[i][m] = (y[i] - tem) / matrix[i][i];
+        }
+    }
+
+    return s;
 }
 
-void DOUBLEmatrixInv(std::vector<std::vector<double>> &matrix)
+void DOUBLEmatrixInv(std::vector<std::vector<double>> &matrix, int rc)
 {
-    
-}
+    std::vector<int> piv;
 
-
-/*
- * 
- */
-
-void printBigNum(int num)
-{
-
+    LUDecompose(matrix, rc - 1);
+    matrix = LUMatrixInvert(matrix, rc - 1);
 }

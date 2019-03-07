@@ -4,7 +4,7 @@
 #include <vector>
 
 void printBigNum(int num);
-void DOUBLEmatrixInv(std::vector<std::vector<double>> &matrix);
+void DOUBLEmatrixInv(std::vector<std::vector<double>> &matrix, int rc);
 void INTEGERQuickSort(std::vector<int> &array);
 
 #endif

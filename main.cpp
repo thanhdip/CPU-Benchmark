@@ -1,39 +1,39 @@
 #include <iostream>
 #include "benchmarkFunctions.h"
 
+void printArray(std::vector<int> array);
+void printMatrix(std::vector<std::vector<double>> matrix);
+
+/* Using std::vector because allocating on heap is easier to allocate large amount of memory. Vector is also really fast as well. 
+ */
+
 int main()
 {
-    /*  INTEGER
+    /* ---------------------------------------------------------------------------------------------------
+     *  INTEGER
      */
 
         //Data Gen
     std::vector<int> array;
     for(int i = 0; i < 5; i++)
     {
-        array.push_back(1);
-        array.push_back(2);
-        array.push_back(3);
-        array.push_back(4);
+        for(int j = 0; j < 10; j++)
+        {
+            array.push_back(j);
+        }
     }
-
-    for(int x : array)
-    {
-        std::cout << x;
-    }
-    std::cout << std::endl;
 
         //Sort
     INTEGERQuickSort(array);
 
-    for(int x : array)
-    {
-        std::cout << x;
-    }
-    std::cout << std::endl;
+        //Check
 
-    /*  DOUBLE
-    */
-    int rc = 100;
+
+    /* ---------------------------------------------------------------------------------------------------
+     *  DOUBLE
+     */
+
+    int rc = 3;
 
     std::vector<std::vector<double>> matrix(rc, std::vector<double>(rc));
 
@@ -44,19 +44,45 @@ int main()
         {
             if(i == j)
             {
-                matrix.at(i).at(j) = 2.000000001;
+                matrix.at(i).at(j) = 2.0001;
             }
             else
             {
-                matrix.at(i).at(j) = 1.000000001;
+                matrix.at(i).at(j) = 1.0001;
             } 
         }
     }
 
         //Invert
-    DOUBLEmatrixInv(matrix);
+    DOUBLEmatrixInv(matrix, rc);
 
-
-
+        //Check
+    
     return 0;
+}
+
+/* Printer Functions
+ * Lives here to help print vectors, matrix, and other.
+ */
+
+void printArray(std::vector<int> array)
+{
+    for(int x : array)
+    {
+        std::cout << x << " ";
+    }
+    std::cout << std::endl;
+}
+
+void printMatrix(std::vector<std::vector<double>> matrix)
+{   
+    for(std::vector<double> vec : matrix)
+    {
+        for(double y : vec)
+        {
+            std::cout << y << " ";
+        }
+        std::cout << std::endl;
+    }
+    std::cout << std::endl;
 }
