@@ -1,4 +1,5 @@
 #include <iostream>
+#include <chrono>
 #include "benchmarkFunctions.h"
 
 void printArray(std::vector<int> array);
@@ -14,17 +15,34 @@ int main()
      */
 
         //Data Gen
+        // 10000 * 1000 = 1.51s 10000 * 500 = .67s 10000 * 800 = 1.12s
+        // 8,000,000 always a little above 1 sec
+
+    int multa = 10000;
+    int multb = 800;
     std::vector<int> array;
-    for(int i = 0; i < 5; i++)
+    for(int i = 0; i < multa; i++)
     {
-        for(int j = 0; j < 10; j++)
+        for(int j = 0; j < multb; j++)
         {
             array.push_back(j);
         }
     }
 
         //Sort
-    INTEGERQuickSort(array);
+    auto start = std::chrono::steady_clock::now();
+
+    //for(int x = 0; x < 10; x++)
+    while(auto t = std::chrono::duration_cast<std::chrono::seconds>( std::chrono::steady_clock::now() - start ).count() < 10)
+    {
+        std::vector<int> arr = array;
+        INTEGERQuickSort(arr);
+    }    
+    
+    auto end = std::chrono::steady_clock::now();
+    std::chrono::duration<double> runtimeInt = end-start;
+    std::cout << "Time: " << runtimeInt.count() << std::endl;
+
 
         //Check
 
@@ -32,12 +50,11 @@ int main()
     /* ---------------------------------------------------------------------------------------------------
      *  DOUBLE
      */
-
-    int rc = 3;
-
-    std::vector<std::vector<double>> matrix(rc, std::vector<double>(rc));
-
+    
         //Data Gen
+        // 475 = 1.07
+    int rc = 475;
+    std::vector<std::vector<double>> matrix(rc, std::vector<double>(rc));
     for(int i = 0; i < rc; i++)
     {
         for(int j = 0; j < rc; j++)
@@ -54,8 +71,15 @@ int main()
     }
 
         //Invert
-    DOUBLEmatrixInv(matrix, rc);
-
+    auto start = std::chrono::steady_clock::now();
+    while(auto t = std::chrono::duration_cast<std::chrono::seconds>( std::chrono::steady_clock::now() - start ).count() < 10)
+    {
+        std::vector<std::vector<double>> mat = matrix;
+        DOUBLEmatrixInv(mat, rc);
+    }
+    auto end = std::chrono::steady_clock::now();
+    std::chrono::duration<double> runtimeInt = end-start;
+    std::cout << "Time: " << runtimeInt.count() << std::endl;
         //Check
     
     return 0;
