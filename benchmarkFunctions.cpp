@@ -5,7 +5,7 @@
 /* QUICKSORT AND HELPER FUNCTIONS
  * Uses vector and function based on Hoare partition scheme
  */
-
+        //Partions the array and swaps to sort
 int partition(std::vector<int> &array, int lo, int hi)
 {
     int pivot = array[(lo+hi)/2];
@@ -35,7 +35,7 @@ int partition(std::vector<int> &array, int lo, int hi)
     }
 
 }
-
+        //Sorts by paritioning then recursively doing so
 void quickSort(std::vector<int> &array, int lo, int hi)
 {
     if(lo < hi)
@@ -57,7 +57,7 @@ void INTEGERQuickSort(std::vector<int> &array)
  * I.e some matrix A is split into two matrix L and U where they are the upper and lower triangle of the square matrix.
  * This makes solving for the inverse easier.
  */
-
+        //Decomposes matrix M = LU where L is lower and U is upper triangle of the square matrix
 void LUDecompose(std::vector<std::vector<double>> &matrix, int dimension)
 {
     double tem;
@@ -74,7 +74,7 @@ void LUDecompose(std::vector<std::vector<double>> &matrix, int dimension)
         }
     }
 }
-
+        //Uses the LU decomposition to then go through both upper and lower triangle and invert the matrix
 std::vector<std::vector<double>> LUMatrixInvert(std::vector<std::vector<double>> &matrix, int dimension)
 {
     std::vector<double> identityVec(dimension + 1, 0.0);
