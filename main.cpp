@@ -22,7 +22,7 @@ int main()
         //Data Gen
         // 10000 * 1000 = 1.51s 10000 * 500 = .67s 10000 * 800 = 1.12s
         // 1000*800 runs just enough to match with matrix inversion to get 500ish avg score on an Intel Core i9-7900X @ 3.30Ghz NO BOOST
-
+        // 5000*800 is perfect for -O3 optimization.
     int multa = 5000;
     int multb = 800;
     std::vector<int> array;
@@ -56,6 +56,7 @@ int main()
         //Data Gen
         // 475 = 1.07 always a little above 1 sec.
         // 225 runs just enough to match with sort to get 500ish avg score on an Intel Core i9-7900X @ 3.30Ghz NO BOOST
+        // 475 is baseline used for -O3 optimization to match with above.
     int rc = 475;
     std::vector<std::vector<double>> matrix(rc, std::vector<double>(rc));
     for(int i = 0; i < rc; i++)

@@ -1,6 +1,5 @@
 #include "benchmarkFunctions.h"
 #include <iostream>
-#include <math.h> 
 
 /* QUICKSORT AND HELPER FUNCTIONS
  * Uses vector and function based on Hoare partition scheme
